@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ammuuu! 🎂</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Floating balloons background */
+    .baloons {
+        position: fixed;
+        font-size: 40px;
+        animation: float 6s ease-in-out infinite;
+        z-index: 1;
+        opacity: 0.7;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-30px) rotate(10deg); }
+    }
+
+    .balloon:nth-child(1) { left: 5%; top: 10%; animation-delay: 0s; }
+    .balloon:nth-child(2) { left: 90%; top: 20%; animation-delay: 1s; }
+    .balloon:nth-child(3) { left: 15%; top: 70%; animation-delay: 2s; }
+    .balloon:nth-child(4) { left: 80%; top: 60%; animation-delay: 3s; }
+
+    /* Confetti animation */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        z-index: 0;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Header Section */
+    header {
+        text-align: center;
+        padding: 60px 20px;
+        animation: fadeInDown 1s ease;
+    }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-size: 3.5em;
+        color: #d63384;
+        text-shadow: 3px 3px 0px rgba(255,255,255,0.5);
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .subtitle {
+        font-size: 1.5em;
+        color: #6f42c1;
+        font-style: italic;
+    }
+
+    /* Message Card */
+    .message-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        animation: fadeIn 1.5s ease;
+        text-align: center;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .message-card h2 {
+        color: #d63384;
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .message-card p {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    /* Photo Gallery */
+    .gallery-section {
+        margin: 50px 0;
+    }
+
+    .gallery-section h2 {
+        text-align: center;
+        color: #d63384;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+    }
+
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .photo-item {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        aspect-ratio: 1;
+    }
+
+    .photo-item:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        color: white;
+        padding: 15px 10px 10px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    /* Video Section */
+    .video-section {
+        margin: 50px 0;
+        text-align: center;
+    }
+
+    .video-section h2 {
+        color: #d63384;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+    }
+
+    .video-container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    video {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    /* Memories/Timeline Section */
+    .memories-section {
+        margin: 50px 0;
+    }
+
+    .memories-section h2 {
+        text-align: center;
+        color: #d63384;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+    }
+
+    .memory-item {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .memory-item:hover {
+        transform: translateX(10px);
+    }
+
+    .memory-icon {
+        font-size: 3em;
+        flex-shrink: 0;
+    }
+
+    .memory-text h3 {
+        color: #6f42c1;
+        margin-bottom: 10px;
+    }
+
+    /* Interactive Button */
+    .surprise-section {
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .surprise-btn {
+        background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+        color: white;
+        border: none;
+        padding: 20px 50px;
+        font-size: 1.3em;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255,107,107,0.4);
+        transition: all 0.3s ease;
+        font-weight: bold;
+    }
+
+    .surprise-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+    }
+
+    .hidden-message {
+        display: none;
+        margin-top: 30px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        animation: bounceIn 0.6s ease;
+    }
+
+    @keyframes bounceIn {
+        0% { transform: scale(0); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .hidden-message.show {
+        display: block;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6f42c1;
+        font-size: 1.1em;
+    }
+
+    /* Modal for photo view */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+        h1 { font-size: 2.2em; }
+        .memory-item { flex-direction: column; text-align: center; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Floating Balloons -->
+<div class="balloon">💕</div>
+<div class="balloon">💕</div>
+<div class="balloon">💕</div>
+<div class="balloon">💕</div>
+
+<!-- Confetti will be added via JS -->
+<div id="confetti-container"></div>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <h1>🎂Happy Birthday Ammuuu!🎉</h1>
+        <p class="subtitle">To my amazing best friend, on your special day!</p>
+    </header>
+
+    <!-- Personal Message -->
+    <div class="message-card">
+        <h2>💕A Message For You💕</h2>
+        <p>Life has been so much brighter with u and u are there in my most darkest days also!. 
+           You've stood by me through thick and thin, and I couldn't ask for a better best friend.</p>
+        <p>On your birthday, I want you to know how much you mean to me.I learned and did this only bcz of u 
+           Here's to celebrating YOU and all the amazing memories we've created together! 🥳</p>
+        <p>May this year bring you endless joy, success, and all your heart desires. 
+           Happy Birthday, bestie! 🎁</p>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="gallery-section">
+        <h2>📸 Our Beautiful Memories</h2>
+        <div class="photo-gallery" id="photoGallery">
+            <!-- Photos will be added here - Replace src with actual photo paths -->
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="image.jpg.jpeg" alt="Memory 1">
+                <div class="photo-caption">MY safest place</div>
+            </div>
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="image.jpg1.jpeg" alt="Memory 2">
+                <div class="photo-caption">My sunshine! </div>
+            </div>
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="img6.jpeg" alt="Memory 3">
+                <div class="photo-caption">The hand I never wanna leave! </div>
+            </div>
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="image.jpg3.jpeg" alt="Memory 4">
+                <div class="photo-caption">Ammujiii💖</div>
+            </div>
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="img4.jpeg" alt="Memory 5">
+                <div class="photo-caption">My smile! ✨</div>
+            </div>
+            <div class="photo-item" onclick="openModal(this)">
+                <img src="img5.jpeg" alt="Memory 6">
+                <div class="photo-caption">Forever friends! 💖</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memories Timeline -->
+    <div class="memories-section">
+        <h2>✨ Special Moments We Shared</h2>
+        <div class="memory-item">
+            <div class="memory-icon">😂</div>
+            <div class="memory-text">
+                <h3>Enemies to Besties</h3>
+                <p>A bestfriend like u never before ever after!,i really don't where life takes us.
+                   I'll always be with u no matter what.Abhi love u jaaaaaaaaaaaaaaaaaaaaaaaaaaaasthi diii💖 </p>
+            </div>
+        </div>
+        <div class="memory-item">
+            <div class="memory-icon">🌟</div>
+            <div class="memory-text">
+                <h3>Our Best Adventure</h3>
+                <p>Mostly our best adventure is chosing each other!,different peoples,different thinkings 
+                   and the two very different mindsets became one in our friendship </p>
+            </div>
+        </div>
+        <div class="memory-item">
+            <div class="memory-icon">😂</div>
+            <div class="memory-text">
+                <h3>Funniest Moment</h3>
+                <p>I actually don't remember the last time we laughed so hard for a funny moment,
+                    but what i always think is mostly we turn our heartbreaks,sadnessand
+                    and troubles into funny moments by our conversations.!</p>
+            </div>
+        </div>
+        <div class="memory-item">
+            <div class="memory-icon">💪</div>
+            <div class="memory-text">
+                <h3>When You Supported Me</h3>
+                <p>Thank you for always being there during my difficult time. 
+                    What can i say about u.You're truly the best dii!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Surprise -->
+    <div class="surprise-section">
+        <button class="surprise-btn" onclick="revealSurprise()">🎁 Click for a Surprise! 🎁</button>
+        <div class="hidden-message" id="surpriseMessage">
+            <h2 style="color: #d63384; margin-bottom: 20px;">🌟Special Birthday Wish🌟</h2>
+            <p style="font-size: 1.3em; color: #333;">
+                "Friend like you don't come around often. You're not just my best friend, 
+                you're my family,NO matter how many peoples come n go to our lifes we'll keep 
+                ending up eachother like we always do.love u dii. Wishing you a year filled with 
+                happiness, success, and all the good things you deserve.
+                Here's to many more birthdays together [by heart]! 🥂
+                Love u foreve and ever n ever diii❤️"
+            </p>
+            <p style="font-size: 1.5em; margin-top: 20px; color: #6f42c1;">
+                <strong>With all my love, Abhiii</strong> 💕
+            </p>
+                <!-- Video Section -->
+    <div class="video-section">
+        <h2>🎬 A Special Video For You</h2>
+        <div class="video-container">
+            <!-- Replace src with your actual video file -->
+            <video controls poster="video-thumbnail.jpg">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️ just for you</p>
+        <p>🎉 Happy Birthday! 🎉</p>
+    </footer>
+</div>
+
+<!-- Modal for Full Photo View -->
+<div class="modal" id="photoModal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    // Create confetti effect
+    function createConfetti() {
+        const colors = ['#ff6b6b', '#ffd93d', '#6c5ce7', '#00b894', '#fd79a8'];
+        const confettiContainer = document.getElementById('confetti-container');
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            confetti.style.width = confetti.style.height = (Math.random() * 8 + 5) + 'px';
+            confettiContainer.appendChild(confetti);
+        }
+    }
+
+    createConfetti();
+
+    // Photo Modal Functions
+    function openModal(element) {
+        const modal = document.getElementById('photoModal');
+        const modalImg = document.getElementById('modalImage');
+        const img = element.querySelector('img');
+        modal.classList.add('active');
+        modalImg.src = img.src;
+    }
+
+    function closeModal() {
+        document.getElementById('photoModal').classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('photoModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    // Surprise reveal function
+    function revealSurprise() {
+        const message = document.getElementById('surpriseMessage');
+        message.classList.toggle('show');
+        
+        if (message.classList.contains('show')) {
+            message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            createConfetti(); // More confetti!
+        }
+    }
+
+    // Add some extra sparkle effects on load
+    window.addEventListener('load', function() {
+        console.log('🎉 Happy Birthday Website Loaded! 🎉');
+    });
+</script>
+
+</body>
+</html>
